@@ -1,4 +1,4 @@
-package cbassdagreat.github.com;
+package cbassdagreat.github.com.main;
 
 import cbassdagreat.github.com.modelo.Menu;
 

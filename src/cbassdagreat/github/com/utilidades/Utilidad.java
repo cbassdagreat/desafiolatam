@@ -1,4 +1,4 @@
-package cbassdagreat.github.com.utilidad;
+package cbassdagreat.github.com.utilidades;
 
 public class Utilidad {
 

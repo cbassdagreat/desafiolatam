@@ -7,6 +7,10 @@ import cbassdagreat.github.com.servicios.ClienteServicio;
 
 public class Menu {
 
+	enum Estado {
+		Activo, Inactivo
+		}
+				
 	private Scanner sc;
 	ClienteServicio cs;
 	ExportarTxt et;
@@ -21,7 +25,7 @@ public class Menu {
 		int opcion = 0;
 		
 		do {
-			System.out.println("Menu\n1)Listar Clientes\n2) Agregar Cliente\n3) Editar Cliente\n4) Cargar Datos\n5) Exportar Datos\n6) Salir\nIngrese una opción:\n");
+			System.out.println("Menu\n1) Listar Clientes\n2) Agregar Cliente\n3) Editar Cliente\n4) Cargar Datos\n5) Exportar Datos\n6) Salir\nIngrese una opción:\n");
 			opcion = sc.nextInt();
 			
 			switch (opcion) {
@@ -49,6 +53,32 @@ public class Menu {
 		} while (opcion!=6);
 	}
 	
+	private Cliente agregar() {
+
+		System.out.println("------Crear Cliente------");
+		System.out.println("Ingrese RUN del Cliente:");
+		String run = sc.next();
+		
+		System.out.println("Ingrese Nombre del Cliente:");
+		//sc.nextLine();
+		String nombre = sc.next();
+		
+		System.out.println("Ingrese Apellido del Cliente:");
+		//sc.nextLine();
+		String apellido = sc.next();
+				
+		System.out.println("Ingrese años como Cliente:");
+		//sc.next();
+		String anios = sc.next();
+		
+		Estado categoria = Estado.Activo;
+		
+		Cliente c = new Cliente (run, nombre, apellido, anios, categoria);
+		
+		return c;
+		
+	}
+
 	private void importar() {
 		System.out.println("Importar Datos");
 		System.out.println("Ingresa la ruta en donde se encuentra el archivo\r\nDBClientes.cvs:");
@@ -82,11 +112,113 @@ public class Menu {
 			et.exportar(cs.getListaClientes(), ruta);
 		}
 		else if(option == 2) {
-			System.out.println("Ingrese la ruta en donde desea exportar el archivo clientes.txt: ");
+			System.out.println("Ingrese la ruta en donde desea exportar el archivo clientes.txt:");
+			String ruta = sc.next();
+			et.exportar(cs.getListaClientes(), ruta);
 		}
 		else {
 			System.out.println("Selección incorrecta");
 		}
 	}
 
+	private void salir() {
+		System.out.println("Saliendo del sistema");
+		System.out.println("Ha salido del sistema");
+	}
+	
+	private void listar() {
+		try {
+			cs.listarClientes();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void editar() {
+		
+		
+		System.out.println("---------Editar Cliente---------\nSeleccione qué desea hacer:\n1.- Cambiar el estado del Cliente\n2.- Cambiar los datos ingresados del Cliente\nIngrese Opción:\n");
+		System.out.println("------------------------");
+		int opcion = sc.nextInt();
+		if(opcion == 1) {
+			System.out.println("Ingrese el RUN del Cliente a editar");
+			String run1 = sc.next();
+			Cliente c1 = cs.buscarRun(run1);
+			if (c1!=null) {
+				System.out.printf("-----Actualizando Estado del Cliente------\nEl estado actual es : %s\n", c1.getEstado());
+				System.out.println("1.-Si desea cambiar el estado del Cliente a Inactivo\n2.-Si desea cambiar el estado del Cliente a Activo\nIngrese Opción\n--------------------------------------");
+					int categoria = sc.nextInt();
+					if (categoria == 1) {
+					Estado myVar = Estado.Activo;
+						//c1.setCategoria("Inactivo");
+					System.out.printf("Estado Cliente %s:\n" , c1.getEstado());
+					}
+					else if(categoria == 2) {
+						int categoria2 = sc.nextInt();
+					Estado myVar = Estado.Inactivo;
+					System.out.printf("Estado Cliente es %s\n" , c1.getEstado());
+					}
+				
+		
+		
+		if(opcion == 2) {
+			System.out.println("Ingrese el RUN del cliente");
+			String run = sc.next();
+			Cliente c = cs.buscarRun(run);
+			if (c!=null) {
+				System.out.printf("RUN del Cliente: %s \n", c.getRun());
+				System.out.printf("Nombre del Cliente: %s \n", c.getNombre());
+				System.out.printf("Apellido del Cliente: %s \n", c.getApellido());
+				System.out.printf("Años como Cliente: %s años \n", c.getAnios());
+				System.out.printf("Categoría del Cliente: %s \n", c.getEstado());
+				
+				int alternativa = sc.nextInt();
+				
+				switch (alternativa) {
+				case 1:
+					System.out.println("Ingresa el nuevo RUN");
+					String rut = sc.next();
+					c.setRun(rut);
+					break;
+				case 2:
+					System.out.println("Ingresa el nuevo Nombre del Cliente");
+					sc.nextLine();
+					String nombre = sc.nextLine();
+					
+					c.setNombre(nombre);
+						break;
+				
+				case 3:
+					System.out.println("Ingresa el nuevo Apellido del Cliente");
+					sc.nextLine();
+					String apellido = sc.nextLine();
+					
+					c.setApellido(apellido);
+			 
+						break;
+					
+				
+				case 4:
+					System.out.println("Ingresa los nuevos años del Cliente");
+					sc.nextLine();
+					String anios = sc.nextLine();
+					
+					c.setAnios(anios);
+						break;
+						
+					default:
+						System.out.println("Alternativa no válida");
+						break;
+				}
+							
+			}
+		}
+		else {
+			System.out.println("No existe un Cliente con ese RUN");
+		}
+		}
+		}
+		
+	}
 }

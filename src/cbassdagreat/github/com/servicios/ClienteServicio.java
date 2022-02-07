@@ -1,4 +1,5 @@
 package cbassdagreat.github.com.servicios;
+import java.util.ArrayList;
 import java.util.List;
 
 import cbassdagreat.github.com.modelo.Cliente;
@@ -12,6 +13,10 @@ public class ClienteServicio {
 		super();
 		this.listaClientes = listaClientes;
 	}
+	
+	public ClienteServicio() {
+		listaClientes = new ArrayList<>();
+	}
 
 	public List<Cliente> getListaClientes() {
 		return listaClientes;
@@ -20,6 +25,8 @@ public class ClienteServicio {
 	public void setListaClientes(List<Cliente> listaClientes) {
 		this.listaClientes = listaClientes;
 	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -37,20 +44,23 @@ public class ClienteServicio {
 	}
 	
 	public void agregarCliente(Cliente c) throws Exception{
+		//c = 
 		if(buscarRun(c.getRun())==null) {
+			listaClientes.add(c);
 			System.out.println("Cliente agregado");
-		}
+			}
 		
 		else {
 			throw new Exception("El Run ingresado ya existe");
 		}
 		
+	}
 		public void listarClientes() {
 			listaClientes.stream().forEach(System.out::print);
 			
 		}
 	}
 
-	}
+	
 
 
