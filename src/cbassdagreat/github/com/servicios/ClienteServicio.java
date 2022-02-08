@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cbassdagreat.github.com.modelo.Cliente;
+import cbassdagreat.github.com.vista.Menu;
 
 
 public class ClienteServicio {
@@ -44,7 +45,8 @@ public class ClienteServicio {
 	}
 	
 	public void agregarCliente(Cliente c) throws Exception{
-		//c = 
+//		Menu menu = new Menu();
+//		c = menu.agregar();
 		if(buscarRun(c.getRun())==null) {
 			listaClientes.add(c);
 			System.out.println("Cliente agregado");

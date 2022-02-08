@@ -1,7 +1,5 @@
 package cbassdagreat.github.com.modelo;
 
-import cbassdagreat.github.com.modelo.Menu.Estado;
-
 public class Cliente {
 
 	public String run;
@@ -12,6 +10,14 @@ public class Cliente {
 	
 	
 	
+	public Cliente() {
+		super();
+	}
+
+
+
+
+
 	public Cliente(String run, String nombre, String apellido, String anios, Estado estado) {
 		super();
 		this.run = run;
@@ -20,6 +26,8 @@ public class Cliente {
 		this.anios = anios;
 		this.estado = estado;
 	}
+	
+	
 
 	
 
@@ -77,11 +85,12 @@ public class Cliente {
 
 
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
+	public void setEstado(Estado datos) {
+		this.estado = datos;
 	}
 
 
+	
 
 	@Override
 	public String toString() {

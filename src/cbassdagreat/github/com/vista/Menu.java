@@ -1,16 +1,16 @@
-package cbassdagreat.github.com.modelo;
+package cbassdagreat.github.com.vista;
 
 import java.util.List;
 import java.util.Scanner;
 
+import cbassdagreat.github.com.modelo.Cliente;
+import cbassdagreat.github.com.modelo.Estado;
+import cbassdagreat.github.com.modelo.ExportarTxt;
 import cbassdagreat.github.com.servicios.ClienteServicio;
 
 public class Menu {
 
-	enum Estado {
-		Activo, Inactivo
-		}
-				
+		
 	private Scanner sc;
 	ClienteServicio cs;
 	ExportarTxt et;
@@ -53,7 +53,7 @@ public class Menu {
 		} while (opcion!=6);
 	}
 	
-	private Cliente agregar() {
+	public Cliente agregar() {
 
 		System.out.println("------Crear Cliente------");
 		System.out.println("Ingrese RUN del Cliente:");
@@ -75,13 +75,21 @@ public class Menu {
 		
 		Cliente c = new Cliente (run, nombre, apellido, anios, categoria);
 		
+		try {
+			cs.agregarCliente(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return c;
+		
 		
 	}
 
 	private void importar() {
 		System.out.println("Importar Datos");
-		System.out.println("Ingresa la ruta en donde se encuentra el archivo\r\nDBClientes.cvs:");
+		System.out.println("Ingresa la ruta en donde se encuentra el archivo\r\nDBClientes.csv:");
 		String ruta = sc.next();
 		List<Cliente> nuevos = et.importar(ruta);
 		if(nuevos!=null) {
@@ -150,28 +158,35 @@ public class Menu {
 				System.out.println("1.-Si desea cambiar el estado del Cliente a Inactivo\n2.-Si desea cambiar el estado del Cliente a Activo\nIngrese Opción\n--------------------------------------");
 					int categoria = sc.nextInt();
 					if (categoria == 1) {
-					Estado myVar = Estado.Activo;
-						//c1.setCategoria("Inactivo");
+					//Estado categoria1 = Estado.Inactivo;
+						c1.setEstado(Estado.Inactivo);
 					System.out.printf("Estado Cliente %s:\n" , c1.getEstado());
 					}
 					else if(categoria == 2) {
-						int categoria2 = sc.nextInt();
-					Estado myVar = Estado.Inactivo;
+						//categoria = sc.nextInt();
+					//Estado estado = Estado.Activo;
+						c1.setEstado(Estado.Activo);
 					System.out.printf("Estado Cliente es %s\n" , c1.getEstado());
 					}
 				
 		
 		
-		if(opcion == 2) {
+		
+		
+	}
+}
+		else if(opcion == 2) {
 			System.out.println("Ingrese el RUN del cliente");
 			String run = sc.next();
 			Cliente c = cs.buscarRun(run);
 			if (c!=null) {
-				System.out.printf("RUN del Cliente: %s \n", c.getRun());
-				System.out.printf("Nombre del Cliente: %s \n", c.getNombre());
-				System.out.printf("Apellido del Cliente: %s \n", c.getApellido());
-				System.out.printf("Años como Cliente: %s años \n", c.getAnios());
-				System.out.printf("Categoría del Cliente: %s \n", c.getEstado());
+				System.out.printf("1.- RUN del Cliente: %s \n", c.getRun());
+				System.out.printf("2.- Nombre del Cliente: %s \n", c.getNombre());
+				System.out.printf("3.- Apellido del Cliente: %s \n", c.getApellido());
+				System.out.printf("4.- Años como Cliente: %s años \n", c.getAnios());
+				System.out.printf("5.- Categoría del Cliente: %s \n", c.getEstado());
+				
+				System.out.println("Ingrese la opción a modificar");
 				
 				int alternativa = sc.nextInt();
 				
@@ -219,6 +234,3 @@ public class Menu {
 		}
 		}
 		}
-		
-	}
-}

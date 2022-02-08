@@ -19,7 +19,7 @@ public class ExportarTxt extends ExportadorTxt {
 	@Override
 	public void exportar(List<Cliente> listaClientes, String ruta) {
 		// TODO Auto-generated method stub
-		String path = String.format("%s/DBClientes.csv", ruta);
+		String path = String.format("%s/clientes.csv", ruta);
 		File file = new File(path);
 		
 		if (file.exists()) {
@@ -27,7 +27,7 @@ public class ExportarTxt extends ExportadorTxt {
 				FileWriter fw = new FileWriter(file, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				for(Cliente cliente : listaClientes) {
-					String c = String.format("%s,%s,%s,%s,%s,%s,%s", cliente.getRun(), cliente.getNombre(), cliente.getApellido(), cliente.getAnios(), cliente.getCategoria());
+					String c = String.format("%s,%s,%s,%s,%s,%s,%s", cliente.getRun(), cliente.getNombre(), cliente.getApellido(), cliente.getAnios(), cliente.getEstado());
 					bw.write(c);
 					bw.newLine();
 					}
@@ -61,7 +61,28 @@ public class ExportarTxt extends ExportadorTxt {
 				while(data !=null) {
 					String[] datos = data.split(",");
 					
-				Cliente c = new Cliente(datos[0],datos[1], datos[2], datos[3], datos[4]);
+				Cliente c = new Cliente();
+				c.setRun(datos[0]);
+				c.setNombre(datos[1]);
+				c.setApellido(datos[2]);
+				c.setAnios(datos[3]);
+				//String a = datos[4].replace(""",);
+				//String dato4 = datos[4];
+				//System.out.println(datos[4]);
+				
+				if(datos[4].equals("Activo")){
+					c.setEstado(Estado.Activo);
+								
+				}
+				
+				else if(datos[4].equals("Inactivo")) {
+					c.setEstado(Estado.Inactivo);
+				}
+				
+				else {
+					c.setEstado(Estado.Inactivo);
+				}
+									
 				lista.add(c);
 				data = br.readLine();
 				}

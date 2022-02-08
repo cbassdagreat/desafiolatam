@@ -1,6 +1,6 @@
 package cbassdagreat.github.com.main;
 
-import cbassdagreat.github.com.modelo.Menu;
+import cbassdagreat.github.com.vista.Menu;
 
 public class Main {
 
