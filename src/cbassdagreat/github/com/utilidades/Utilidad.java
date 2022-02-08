@@ -4,7 +4,7 @@ public class Utilidad {
 
 	public static void limpiar() {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < 100;i++) {
+		for (int i = 0; i < 10;i++) {
 			System.out.println("");
 		}
 
@@ -12,7 +12,7 @@ public class Utilidad {
 	
 	public static void esperar() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2500);
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();

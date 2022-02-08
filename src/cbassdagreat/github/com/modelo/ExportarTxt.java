@@ -20,14 +20,15 @@ public class ExportarTxt extends ExportadorTxt {
 	public void exportar(List<Cliente> listaClientes, String ruta) {
 		// TODO Auto-generated method stub
 		String path = String.format("%s/clientes.csv", ruta);
+		String path1 = String.format("%s/clientes.txt", ruta);
 		File file = new File(path);
 		
 		if (file.exists()) {
 			try {
-				FileWriter fw = new FileWriter(file, true);
+				FileWriter fw = new FileWriter(file);
 				BufferedWriter bw = new BufferedWriter(fw);
 				for(Cliente cliente : listaClientes) {
-					String c = String.format("%s,%s,%s,%s,%s,%s,%s", cliente.getRun(), cliente.getNombre(), cliente.getApellido(), cliente.getAnios(), cliente.getEstado());
+					String c = String.format("%s,%s,%s,%s,%s", cliente.getRun(), cliente.getNombre(), cliente.getApellido(), cliente.getAnios(), cliente.getEstado());
 					bw.write(c);
 					bw.newLine();
 					}
@@ -38,9 +39,32 @@ public class ExportarTxt extends ExportadorTxt {
 				System.out.println(ex.getMessage());
 
 		}
+			
 		
-	}	
+	}	else if (!file.exists()) {
 		
+		try {
+			file.createNewFile();
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for(Cliente cliente : listaClientes) {
+				String c = String.format("%s,%s,%s,%s,%s", cliente.getRun(), cliente.getNombre(), cliente.getApellido(), cliente.getAnios(), cliente.getEstado());
+				bw.write(c);
+				bw.newLine();
+				}
+				bw.close();
+				
+				System.out.println("Archivo Creado");
+	
+		}
+		
+		
+		catch (IOException ex) {
+			System.out.println(ex.getMessage());
+
+	}
+		
+	}
 			else {
 				System.out.println("Ruta incorrecta");
 				

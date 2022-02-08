@@ -7,6 +7,7 @@ import cbassdagreat.github.com.modelo.Cliente;
 import cbassdagreat.github.com.modelo.Estado;
 import cbassdagreat.github.com.modelo.ExportarTxt;
 import cbassdagreat.github.com.servicios.ClienteServicio;
+import cbassdagreat.github.com.utilidades.Utilidad;
 
 public class Menu {
 
@@ -50,7 +51,15 @@ public class Menu {
 			default: System.out.println("Opción no válida");
 			
 			}
+			
+			Utilidad.esperar();
+			Utilidad.limpiar();
+			generarMenu();
+			
 		} while (opcion!=6);
+		
+	
+		
 	}
 	
 	public Cliente agregar() {
@@ -114,15 +123,17 @@ public class Menu {
 		System.out.println("Seleccione el formato a exportar:");
 		System.out.println("1.- Formato csv\n2.- Formato txt\nIngrese una opción:\n");
 		int option = sc.nextInt();
+		String path;
+		String path1;
 		if (option == 1) {
 			System.out.println("Ingrese la ruta en donde desea exportar el archivo clientes.csv:");
-			String ruta = sc.next();
-			et.exportar(cs.getListaClientes(), ruta);
+			path = sc.next();
+			et.exportar(cs.getListaClientes(), path);
 		}
 		else if(option == 2) {
 			System.out.println("Ingrese la ruta en donde desea exportar el archivo clientes.txt:");
-			String ruta = sc.next();
-			et.exportar(cs.getListaClientes(), ruta);
+			path1 = sc.next();
+			et.exportar(cs.getListaClientes(), path1);
 		}
 		else {
 			System.out.println("Selección incorrecta");
@@ -130,8 +141,12 @@ public class Menu {
 	}
 
 	private void salir() {
+		
 		System.out.println("Saliendo del sistema");
 		System.out.println("Ha salido del sistema");
+		Utilidad.esperar();
+		Utilidad.limpiar();
+		System.exit(0);
 	}
 	
 	private void listar() {
