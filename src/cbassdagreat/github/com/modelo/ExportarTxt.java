@@ -33,6 +33,8 @@ public class ExportarTxt extends ExportadorTxt {
 					bw.newLine();
 					}
 					bw.close();
+					
+					System.out.println("Archivo Creado");
 		
 			}
 			catch (IOException ex) {

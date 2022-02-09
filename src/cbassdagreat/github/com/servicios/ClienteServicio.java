@@ -44,7 +44,7 @@ public class ClienteServicio {
 		return null;
 	}
 	
-	public Boolean agregarCliente(Cliente c) throws Exception{
+	public boolean agregarCliente(Cliente c){
 //		Menu menu = new Menu();
 //		c = menu.agregar();
 		if(buscarRun(c.getRun())==null) {
@@ -53,13 +53,19 @@ public class ClienteServicio {
 			return true;
 			}
 		
-		else {
-			throw new Exception("El RUN ingresado ya existe");
+		else if(buscarRun(c.getRun())==null) {
+			listaClientes.add(c);
+			System.out.println("Cliente agregado");
+			
+			}
+		return false;
+			
+			//System.out.println("El RUN ingresado ya existe");
 			
 		}
 		
 		
-	}
+	
 		public void listarClientes() {
 			listaClientes.stream().forEach(System.out::print);
 			

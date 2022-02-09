@@ -118,7 +118,7 @@ public class Menu {
 		}
 	}
 	
-	private void exportar() {
+	public void exportar() {
 		System.out.println("---------Exportar Datos---------");
 		System.out.println("Seleccione el formato a exportar:");
 		System.out.println("1.- Formato csv\n2.- Formato txt\nIngrese una opción:\n");
